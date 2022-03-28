@@ -1,5 +1,9 @@
 import './index.css';
 import React, { Component } from 'react';
+import { Header } from './grid_components/Header';
+import { Aside } from './grid_components/Aside';
+import { Nav } from './grid_components/Nav';
+import { Footer } from './grid_components/Footer';
 
 class App extends Component {
 
@@ -36,18 +40,32 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <h1>
-                    Expense Manager
-                </h1>
-                <button
-                    className='connect_button'
-                    onClick={ this.handleButtonClick }>
-                        { this.state.buttonLabel }
-                </button>
-                <p>
-                    <b>Received data</b>: { this.state.data }
-                </p>
+            <div className='app'>
+
+            <Header />
+
+            <Nav />
+
+            <main>
+                <div>
+                    <h1>
+                        Expense Manager
+                    </h1>
+                    <button
+                        className='connect_button'
+                        onClick={ this.handleButtonClick }>
+                            { this.state.buttonLabel }
+                    </button>
+                    <p>
+                        <b>Received data</b>: { this.state.data }
+                    </p>
+                </div>
+            </main>
+
+            <Aside />
+
+            <Footer />
+
             </div>
         )
     }
