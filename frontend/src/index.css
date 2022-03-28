@@ -1,4 +1,4 @@
-* {
+/* * {
     padding: 0;
     margin: 0;
     box-sizing: border-size;
@@ -21,4 +21,107 @@ h2 {
     padding: 5px;
     border-radius: 5px;
     margin: 10px;
+} */
+
+
+/* Main settings */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-size;
+}
+
+body {
+    font-size: 1em;
+}
+
+/************************** APP ***************************
+ *                      <header></header>                 *
+ *                                                        *
+ *  <nav>                 <main>                  <aside> *
+ * category                                         user  *
+ *               <Widget/> <Widget/> <Widget/>            *
+ *   info                                           info  *
+ *  </nav>                </main>                </aside> *
+ *                                                        *
+ *                      <footer></footer>                 *
+**********************************************************/
+
+.app {
+    display: grid;
+
+    grid-template-areas:
+        "header header header"
+        "nav content side"     
+        "footer footer footer";
+    
+    grid-template-columns: minmax(150px, auto) 1fr minmax(150px, auto);
+    grid-template-rows: auto 1fr auto;
+    grid-gap: 10px;
+
+    height: 100vh;
+}
+
+header {
+    grid-area: header;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: #33CC33;  
+    background-color: #000000;  
+
+    padding: 10px;
+}
+
+nav {
+    grid-area: nav;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: rgb(242, 242, 242);
+    color: #333333;  
+}
+
+nav ul {
+    list-style: none;
+}
+
+main {
+    grid-area: content;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+aside {
+    grid-area: side;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: rgb(242, 242, 242);
+    color: #333333;  
+}
+
+aside ul {
+    list-style: none;
+}
+
+footer {
+    grid-area: footer;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: #33CC33;  
+    background-color: #000000;  
+
+    padding: 10px;
 }
