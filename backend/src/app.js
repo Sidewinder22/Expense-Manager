@@ -3,7 +3,7 @@ const app = express();
 const port = 2999;
 
 var cors = require('cors')
-var db = require("./database.js")
+var database = require("./database.js")
 
 app.use(cors({
     origin: 'http://localhost:3000'
@@ -27,9 +27,26 @@ app.listen(port, () => {
 app.get("/api/users", (request, response, next) => {
     console.log("api users");
 
-    var sql = "select * from user"
+    var sql = "select * from user";
+    var params = [];
+    database.all(sql, params, (err, rows) => {
+        if (err) {
+            response.status(400).json({"error": err.message});
+            return;
+        }
+        
+        response.json({
+            "message": "success",
+            "data": rows
+        })
+    });
+});
+
+
+app.get("/api/expences", (request, response, next) => {
+    var sql = "select * from expence"
     var params = []
-    db.all(sql, params, (err, rows) => {
+    database.all(sql, params, (err, rows) => {
         if (err) {
             response.status(400).json({"error": err.message});
             return;
