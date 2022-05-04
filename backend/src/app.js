@@ -1,5 +1,5 @@
 const express = require('express');
-const app = express();
+const app = module.exports = express();
 const apiRouter = require('./routers/apiRouter.js');
 const port = 2999;
 

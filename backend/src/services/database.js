@@ -48,6 +48,7 @@ let database = new sqlite3.Database(databaseName, (error) => {
                 else {
                     var insert = 'INSERT INTO expence (date, amount, category, notes) VALUES (?,?,?,?)';
                     database.run(insert, ["2022-05-03 23:11:11.001", "20.2", "przemysłowe", "rzeczy do mycia okien"]);
+                    database.run(insert, ["2022-04-13 12:11:11.001", "197", "spożywcze", "Lidl"]);
                 }
             }
         );
