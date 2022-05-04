@@ -34,7 +34,7 @@ let database = new sqlite3.Database(databaseName, (error) => {
 
         database.run(`CREATE TABLE expence (
             id              INTEGER PRIMARY KEY AUTOINCREMENT,
-            date            TEXT NOT NULL,
+            date            DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
             amount          REAL NOT NULL,
             category        INTEGER NOT NULL,
             notes           TEXT,
