@@ -13,7 +13,7 @@ let database = new sqlite3.Database(databaseName, (error) => {
         console.log(`Successfully connected to the database.`)
 
         database.run(`CREATE TABLE user (
-            id                  INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id             INTEGER PRIMARY KEY AUTOINCREMENT,
             name                TEXT NOT NULL,
             email               TEXT NOT NULL UNIQUE,
             password            TEXT NOT NULL,
@@ -33,12 +33,13 @@ let database = new sqlite3.Database(databaseName, (error) => {
         );
 
         database.run(`CREATE TABLE expence (
-            id              INTEGER PRIMARY KEY AUTOINCREMENT,
-            date            DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
-            amount          REAL NOT NULL,
-            category        INTEGER NOT NULL,
-            notes           TEXT,
-            FOREIGN KEY (id) REFERENCES user (id)
+            expence_id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            date                    DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL,
+            amount                  REAL NOT NULL,
+            category                INTEGER NOT NULL,
+            notes                   TEXT,
+            user_id                 INTEGER,
+            CONSTRAINT fk_user      FOREIGN KEY (user_id) REFERENCES user (user_id)
             )`,
             (error) => {
                 if (error) {
@@ -46,9 +47,9 @@ let database = new sqlite3.Database(databaseName, (error) => {
                     console.log(`Error during creating expence table: ${error}`);
                 }
                 else {
-                    var insert = 'INSERT INTO expence (date, amount, category, notes) VALUES (?,?,?,?)';
-                    database.run(insert, ["2022-05-03 23:11:11.001", "20.2", "przemysłowe", "rzeczy do mycia okien"]);
-                    database.run(insert, ["2022-04-13 12:11:11.001", "197", "spożywcze", "Lidl"]);
+                    var insert = 'INSERT INTO expence (date, amount, category, notes, user_id) VALUES (?,?,?,?,?)';
+                    database.run(insert, ["2022-05-03 23:11:11.001", "20.2", "przemysłowe", "rzeczy do mycia okien", "2"]);
+                    database.run(insert, ["2022-04-13 12:11:11.001", "197", "spożywcze", "Lidl", "1"]);
                 }
             }
         );
