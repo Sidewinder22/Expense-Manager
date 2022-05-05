@@ -1,13 +1,10 @@
 const express = require('express');
-// const app = express()
-//const app = req.app;
 const app = require('../app');
 const router = express.Router();
 const database = require('../services/database.js');
 const md5 = require('md5');
 
 const bodyParser = require("body-parser");
-const { request, response } = require('express');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.unsubscribe(bodyParser.json());
 
@@ -91,6 +88,24 @@ router.post('/user', (request, response, next) => {
             "data": data,
             "id": this.lastID
         });
+    });
+});
+
+// Delete user by id
+router.delete('/user/:id', (request, response, next) => {
+    console.log(`Delete user by id: ${request.params.id}`);
+
+    var sql = 'DELETE FROM user WHERE id = ?';
+
+    database.run(
+        sql,
+        request.params.id,
+        (error, result) => {
+            if (error) {
+                response.status(400).json({ "error": response.message });
+                return;
+            }
+            response.json({ "message": "deleted", changes: this.changes })
     });
 });
 
